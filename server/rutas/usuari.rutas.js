@@ -4,11 +4,19 @@ const _ = require('underscore');
 
 const Usuari = require('../models/usuari.model');
 
+const { verificaToken, verificaRol } = require('../middlewares/autentificacio')
+
 const app = express();
 
 // Peticions GET - POST - PUT - DELETE
 
-app.get('/usuari', function(req, res) {
+app.get('/usuari', verificaToken, (req, res) => {
+
+    // return res.json({
+    //     usuari: req.usuari,
+    //     nom: req.usuari.nom,
+    //     correu: req.usuari.correu
+    // });
 
     let desde = req.query.desde || 0;
     desde = Number(desde);
@@ -41,7 +49,7 @@ app.get('/usuari', function(req, res) {
 
 });
 
-app.post('/usuari', function(req, res) {
+app.post('/usuari', [verificaToken, verificaRol], (req, res) => {
     let body = req.body;
 
     let usuari = new Usuari({
@@ -65,7 +73,7 @@ app.post('/usuari', function(req, res) {
     });
 });
 
-app.put('/usuari/:id', function(req, res) {
+app.put('/usuari/:id', [verificaToken, verificaRol], (req, res) => {
 
     let id = req.params.id;
     let body = _.pick(req.body, ['nom', 'correu', 'imatge', 'role', 'estat']);
@@ -88,7 +96,7 @@ app.put('/usuari/:id', function(req, res) {
     });
 });
 
-app.delete('/usuari/:id', function(req, res) {
+app.delete('/usuari/:id', verificaToken, (req, res) => {
 
     let id = req.params.id;
     //  Usuari.findByIdAndRemove(id, (err, usuariBorrat) => {
