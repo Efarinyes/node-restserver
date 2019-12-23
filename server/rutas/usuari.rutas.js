@@ -96,7 +96,7 @@ app.put('/usuari/:id', [verificaToken, verificaRol], (req, res) => {
     });
 });
 
-app.delete('/usuari/:id', verificaToken, (req, res) => {
+app.delete('/usuari/:id', [verificaToken, verificaRol], (req, res) => {
 
     let id = req.params.id;
     //  Usuari.findByIdAndRemove(id, (err, usuariBorrat) => {
