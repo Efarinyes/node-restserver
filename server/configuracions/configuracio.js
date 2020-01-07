@@ -19,7 +19,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 // 24 hores
 // 30 dies
 
-process.env.CADUCITAT = 60 * 60 * 24 * 30;
+process.env.CADUCITAT = '48h';
 
 // ================================================================
 // SEED d'autentificació
