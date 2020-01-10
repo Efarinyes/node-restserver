@@ -43,11 +43,33 @@ let verificaRol = (req, res, next) => {
             }
         });
     }
+};
 
+// ============================
+// Verificar token per URL
+// ============================
 
+let verificaTokenImg = (req, res, next) => {
+
+    let token = req.query.token;
+
+    jwt.verify(token, process.env.SEED, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    missatge: 'Token no vàlid'
+                }
+            });
+        }
+        req.usuari = decoded.usuari;
+
+        next();
+    });
 };
 
 module.exports = {
     verificaToken,
-    verificaRol
+    verificaRol,
+    verificaTokenImg
 };
