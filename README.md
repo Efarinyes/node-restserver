@@ -2,7 +2,7 @@
 
 ## Rest Server realitzat amb Node
 
-Instalar els mòduuls de Node amb:
+Instalar els mòduls de Node amb:
 Integtrat amb Heroku i MongoDB Atlas
 Usem compass per conectar-nos
 
